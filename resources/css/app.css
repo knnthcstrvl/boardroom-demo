@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes brshimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.br-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: rgb(226 232 240);
+  border-radius: 0.375rem;
+}
+
+.br-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  animation: brshimmer 1.2s infinite;
+}
+
+.dark .br-shimmer {
+  background: rgb(51 65 85);
+}
+
+.dark .br-shimmer::after {
+  background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.7), transparent);
+}

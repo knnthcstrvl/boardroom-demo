@@ -31,6 +31,9 @@ Route::get('/auth/microsoft/redirect', [MicrosoftAuthController::class, 'redirec
 Route::get('/auth/microsoft/callback', [MicrosoftAuthController::class, 'callback'])->name('auth.microsoft.callback');
 
 Route::post('/logout', [MicrosoftAuthController::class, 'logout'])->middleware('auth')->name('logout');
+Route::post('/auth/demo-admin', [MicrosoftAuthController::class, 'demoAdminLogin'])
+    ->middleware('throttle:10,1')
+    ->name('auth.demo-admin');
 
 Route::get('/email/reservations/{reservation}/approve', [ReservationEmailActionController::class, 'approve'])
     ->middleware('signed')

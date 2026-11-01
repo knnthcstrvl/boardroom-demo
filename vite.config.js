@@ -25,8 +25,9 @@ export default defineConfig(({ mode }) => {
         `${useHttps ? 'https' : 'http'}://${devHost}:${devPort}`
 
     return {
-        // 🔑 THIS IS THE IMPORTANT LINE
-        base: mode === 'production' ? '/boardroom/' : '/',
+        // The app is served from the web root in local development (for example,
+        // `php artisan serve` at http://127.0.0.1:8000).
+        base: '/',
 
         plugins: [
             laravel({
@@ -42,6 +43,7 @@ export default defineConfig(({ mode }) => {
             strictPort: true,
             https,
             origin,
+            cors: { origin: true },
             hmr: {
                 host: devHost,
                 protocol: useHttps ? 'wss' : 'ws',

@@ -172,4 +172,18 @@ class MicrosoftAuthController extends Controller
 
         return redirect()->route('login');
     }
+
+    public function demoAdminLogin(Request $request)
+    {
+        abort_unless(config('services.demo.admin_login_enabled'), 404);
+
+        $email = (string) config('services.demo.admin_email');
+        $user = User::query()->whereRaw('LOWER(email) = ?', [Str::lower($email)])->first();
+        abort_unless($user && $user->is_admin, 503, 'The configured demo admin account is unavailable.');
+
+        Auth::login($user, remember: false);
+        $request->session()->regenerate();
+
+        return response()->json(['redirect' => url('/kiosk')]);
+    }
 }

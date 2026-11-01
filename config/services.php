@@ -50,4 +50,9 @@ return [
         ],
     ],
 
+    'demo' => [
+        'admin_login_enabled' => (bool) env('DEMO_ADMIN_LOGIN_ENABLED', false),
+        'admin_email' => env('DEMO_ADMIN_EMAIL', 'admin@example.com'),
+    ],
+
 ];

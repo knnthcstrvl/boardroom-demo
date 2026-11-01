@@ -5,14 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>BoardRoom | Login</title>
-    <link rel="icon" type="image/png" href="{{ asset('storage/img/'.rawurlencode('favicon.png')) }}">
     <script>
         window.__AUTH_USER__ = null;
+        window.__DEMO_ADMIN_LOGIN_ENABLED__ = @json((bool) config('services.demo.admin_login_enabled'));
         window.__APP_BASE_PATH__ = @json(request()->getBaseUrl());
         window.__BRANDING__ = {
             name: 'BoardRoom',
-            logoUrl: '{{ asset('storage/img/'.rawurlencode('logo dark.png')) }}',
-            faviconUrl: '{{ asset('storage/img/'.rawurlencode('favicon.png')) }}',
         };
     </script>
     @viteReactRefresh
@@ -24,7 +22,6 @@
             <div class="min-h-screen flex items-center justify-center px-4">
                 <div class="w-full max-w-md rounded-xl bg-white p-8 shadow-sm ring-1 ring-slate-200 dark:bg-slate-900 dark:ring-slate-800">
                     <a href="{{ url('/kiosk') }}" class="flex items-center gap-3 no-underline hover:opacity-95">
-                        <img src="{{ asset('storage/img/'.rawurlencode('logo dark.png')) }}" alt="BoardRoom" class="h-10 w-auto block">
                         <div class="h-10 flex items-center text-[29px] leading-none font-semibold tracking-tight">
                             <span class="text-brand-primary">Board</span><span class="text-brand-secondary">Room</span>
                         </div>

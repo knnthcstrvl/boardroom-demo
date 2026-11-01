@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="{{ asset('storage/img/'.rawurlencode('favicon.png')) }}">
     <title>{{ $title }} - BoardRoom</title>
 </head>
 <body style="font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: #f8fafc; margin: 0;">

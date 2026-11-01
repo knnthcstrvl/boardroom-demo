@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'BoardRoom' }}</title>
-    <link rel="icon" type="image/png" href="{{ asset('storage/img/'.rawurlencode('favicon.png')) }}">
     <script>
         window.__AUTH_USER__ = @json($authUser);
+        window.__DEMO_ADMIN_LOGIN_ENABLED__ = @json((bool) config('services.demo.admin_login_enabled'));
         window.__APP_BASE_PATH__ = @json(request()->getBaseUrl());
         window.__BRANDING__ = {
             name: 'BoardRoom',
-            logoUrlDark: '{{ asset('storage/img/'.rawurlencode('logo dark.png')) }}',
-            logoUrlLight: '{{ asset('storage/img/'.rawurlencode('logo light.png')) }}',
-            faviconUrl: '{{ asset('storage/img/'.rawurlencode('favicon.png')) }}',
         };
         // Keep the splash screen visible a bit longer on every page load.
         window.__MIN_BOOT_SPLASH_MS__ = 900;
@@ -68,16 +65,6 @@
         <div class="min-h-screen bg-white px-4 py-6 text-center font-sans dark:bg-slate-950">
             <div class="mx-auto flex min-h-screen max-w-lg flex-col items-center justify-center">
                 <a href="{{ url('/kiosk') }}" class="flex items-center justify-center gap-3 no-underline hover:opacity-95">
-                    <img
-                        src="{{ asset('storage/img/'.rawurlencode('logo dark.png')) }}"
-                        alt="BoardRoom"
-                        class="block h-10 w-auto dark:hidden"
-                    >
-                    <img
-                        src="{{ asset('storage/img/'.rawurlencode('logo light.png')) }}"
-                        alt="BoardRoom"
-                        class="hidden h-10 w-auto dark:block"
-                    >
                     <div class="flex h-10 items-center text-[29px] font-semibold leading-none tracking-tight">
                         <span class="text-brand-primary">Board</span><span class="text-brand-secondary">Room</span>
                     </div>

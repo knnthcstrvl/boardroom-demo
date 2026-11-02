@@ -117,7 +117,7 @@ For small local setups, `QUEUE_CONNECTION=sync` sends jobs immediately.
 
 ### Demo admin sign-in
 
-The optional demo admin endpoint is disabled by default. Enable it only for a controlled demo environment, and make sure the configured email belongs to an existing admin account:
+The demo admin endpoint is enabled by default when `APP_ENV=production`, and disabled in other environments. Use it only on a controlled demo deployment, make sure the configured email belongs to an existing admin account, and set `DEMO_ADMIN_LOGIN_ENABLED=false` in Render to disable it:
 
 ```dotenv
 DEMO_ADMIN_LOGIN_ENABLED=true

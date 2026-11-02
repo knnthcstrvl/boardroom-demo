@@ -51,7 +51,12 @@ return [
     ],
 
     'demo' => [
-        'admin_login_enabled' => (bool) env('DEMO_ADMIN_LOGIN_ENABLED', false),
+        // Make the demo sign-in visible on production demo deployments by default.
+        // Set DEMO_ADMIN_LOGIN_ENABLED=false explicitly to keep it disabled.
+        'admin_login_enabled' => filter_var(
+            env('DEMO_ADMIN_LOGIN_ENABLED', env('APP_ENV') === 'production'),
+            FILTER_VALIDATE_BOOLEAN
+        ),
         'admin_email' => env('DEMO_ADMIN_EMAIL', 'admin@example.com'),
     ],
 

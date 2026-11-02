@@ -12,10 +12,6 @@
         window.__BRANDING__ = {
             name: 'BoardRoom',
         };
-        // Keep the splash screen visible a bit longer on every page load.
-        window.__MIN_BOOT_SPLASH_MS__ = 900;
-        window.__BOOT_SPLASH_STARTED_AT__ = Date.now();
-
         // Apply theme class as early as possible so the Blade splash respects dark mode.
         (function () {
             var basePath = String(window.__APP_BASE_PATH__ || '').replace(/\/+$/, '');

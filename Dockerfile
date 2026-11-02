@@ -27,4 +27,4 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 
 EXPOSE 10000
 
-CMD php artisan migrate:fresh --force && php artisan migrate --force && php artisan db:seed --class=Database\\Seeders\\DatabaseSeeder --force && php artisan storage:link & php artisan serve --host=0.0.0.0 --port=${PORT:-10000}
+CMD ["sh", "-c", "php artisan migrate --force && (php artisan storage:link || true) && exec php artisan serve --host=0.0.0.0 --port=${PORT:-10000}"]

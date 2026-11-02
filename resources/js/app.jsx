@@ -119,14 +119,13 @@ function App() {
 }
 
 const el = document.getElementById("app")
-if (el)
-  window.setTimeout(() => {
-    createRoot(el).render(
-      <ToastProvider>
-        <ErrorBoundary>
-          <App />
-        </ErrorBoundary>
-      </ToastProvider>
-    )
-    window.__APP_MOUNTED__ = true
-  }, Math.max(0, Number(window.__MIN_BOOT_SPLASH_MS__ || 0) - (Date.now() - Number(window.__BOOT_SPLASH_STARTED_AT__ || 0))))
+if (el) {
+  createRoot(el).render(
+    <ToastProvider>
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
+    </ToastProvider>
+  )
+  window.__APP_MOUNTED__ = true
+}

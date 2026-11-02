@@ -184,6 +184,10 @@ class MicrosoftAuthController extends Controller
         Auth::login($user, remember: false);
         $request->session()->regenerate();
 
-        return response()->json(['redirect' => url('/kiosk')]);
+        if ($request->expectsJson()) {
+            return response()->json(['redirect' => url('/kiosk')]);
+        }
+
+        return redirect('/kiosk');
     }
 }

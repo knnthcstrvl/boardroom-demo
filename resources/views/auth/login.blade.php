@@ -34,6 +34,20 @@
                     >
                         Sign in with Microsoft
                     </a>
+
+                    @if (config('services.demo.admin_login_enabled'))
+                        <div class="my-5 flex items-center gap-3 text-xs font-medium uppercase tracking-wide text-slate-400">
+                            <span class="h-px flex-1 bg-slate-200 dark:bg-slate-700"></span>
+                            Demo access
+                            <span class="h-px flex-1 bg-slate-200 dark:bg-slate-700"></span>
+                        </div>
+                        <form method="POST" action="{{ route('auth.demo-admin') }}">
+                            @csrf
+                            <button type="submit" class="inline-flex w-full items-center justify-center rounded-lg border border-brand-primary/30 bg-white px-4 py-2.5 text-sm font-medium text-brand-primary hover:bg-brand-primary/5 dark:border-brand-secondary/40 dark:bg-slate-900 dark:text-brand-secondary dark:hover:bg-slate-800">
+                                Continue as demo admin
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>

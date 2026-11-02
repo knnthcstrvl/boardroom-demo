@@ -133,7 +133,7 @@ docker build -t boardroom .
 docker run --env-file .env -p 10000:10000 boardroom
 ```
 
-**Deployment note:** the current Docker startup command runs `migrate:fresh` and seeds the database on each container start. `migrate:fresh` drops existing tables and data. Review and change that command before using this image with any persistent or production database.
+The Docker startup command applies pending migrations before starting the web server. It does not reset or seed the database. For a Render demo login, set `DEMO_ADMIN_LOGIN_ENABLED=true` and `DEMO_ADMIN_EMAIL` to the email of an existing admin account in Render's environment settings. Keep this disabled on deployments where demo access is not intended.
 
 ## Useful commands
 

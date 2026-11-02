@@ -1416,6 +1416,14 @@ export default function Kiosk({ user }) {
             >
               {isDark ? <SunIcon className="h-5 w-5" /> : <MoonIcon className="h-5 w-5" />}
             </button>
+	            {!user ? (
+	              <a
+	                href={withBasePath("/login")}
+	                className="inline-flex items-center justify-center rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-200 dark:ring-slate-700 dark:hover:bg-slate-800"
+	              >
+	                Login
+	              </a>
+	            ) : null}
 	            {user && perms.anyAccess ? (
 	              <a
 	                href={withBasePath("/admin")}

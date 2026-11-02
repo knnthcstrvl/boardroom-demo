@@ -1,77 +1,162 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="public/images/boardroom.png" alt="BoardRoom meeting room booking" width="100%">
 </p>
 
-## About Laravel
+<h1 align="center">BoardRoom</h1>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  A straightforward way to see room availability, request a meeting, and keep approvals moving.
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p align="center">
+  <img src="https://img.shields.io/badge/Laravel-12-FF2D20?logo=laravel&logoColor=white" alt="Laravel 12">
+  <img src="https://img.shields.io/badge/PHP-8.2%2B-777BB4?logo=php&logoColor=white" alt="PHP 8.2 or newer">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black" alt="React 19">
+  <img src="https://img.shields.io/badge/Vite-7-646CFF?logo=vite&logoColor=white" alt="Vite 7">
+</p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+BoardRoom is a meeting-room scheduling app with a shared weekly calendar, reservation requests, approval workflows, and an admin area for managing access. The interface is built with React and served by Laravel; reservation times use the configured application timezone (Asia/Manila by default).
 
-## Learning Laravel
+## What you can do
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- Browse a weekday calendar and check pending or approved reservations by room.
+- Request, edit, reschedule, or cancel a reservation, including recurring schedules.
+- Prevent overlapping bookings and review conflicts before approving a request.
+- Approve or reject requests in the app or from signed links in email.
+- Manage users, roles, permissions, and reservation history in the admin area.
+- See reservation and user changes update through server-sent events, with periodic refresh as a fallback.
+- Sign in with Microsoft, optionally restrict sign-in to specified email domains, and send approval/status emails through SMTP.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Stack
 
-## Laravel Sponsors
+- **Backend:** PHP 8.2+, Laravel 12
+- **Frontend:** React 19, Vite 7, Tailwind CSS
+- **Database:** SQLite by default; MySQL is supported
+- **Authentication:** Microsoft OAuth 2.0 sign-in
+- **Email and queue:** Laravel mail and database queue by default
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Run locally
 
-### Premium Partners
+### Requirements
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+PHP 8.2 or newer with the PDO driver for your database, Composer, Node.js and npm, and SQLite or MySQL.
 
-## Contributing
+1. Install PHP and JavaScript dependencies:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```sh
+   composer install
+   npm install
+   ```
 
-## Code of Conduct
+2. Create your environment file and application key:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+   ```sh
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-## Security Vulnerabilities
+   On Windows PowerShell, use `Copy-Item .env.example .env` in place of `cp`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. Configure the database in `.env`. The example uses SQLite. Create the file if needed:
+
+   ```sh
+   touch database/database.sqlite
+   ```
+
+   For PowerShell: `New-Item database/database.sqlite -ItemType File`. For MySQL, set `DB_CONNECTION=mysql` and provide `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, and `DB_PASSWORD`.
+
+4. Apply migrations and optionally load sample data:
+
+   ```sh
+   php artisan migrate
+   php artisan db:seed
+   ```
+
+   The seeders create a Board Room, demo users, and sample reservations. Seeded accounts use `password`; use this only in a local development database and never expose it on a public deployment.
+
+5. Build assets and start the application:
+
+   ```sh
+   npm run build
+   composer run dev
+   ```
+
+   The `dev` script starts Laravel, Vite, a queue listener, and the log viewer. Alternatively, run `php artisan serve` and `npm run dev` in separate terminals.
+
+Open the URL printed by Laravel (typically `http://localhost:8000`). The root route redirects to `/kiosk`; authenticated users can open `/admin`.
+
+## Configuration
+
+Set `APP_NAME`, `APP_URL`, and `APP_TIMEZONE` for your environment. The example timezone is `Asia/Manila`; meeting room records may also define a timezone.
+
+### Microsoft sign-in
+
+Register an application in Microsoft Entra ID and configure its callback URL as `${APP_URL}/auth/microsoft/callback`. Set these values in `.env`:
+
+```dotenv
+MICROSOFT_TENANT_ID=common
+MICROSOFT_CLIENT_ID=
+MICROSOFT_CLIENT_SECRET=
+MICROSOFT_REDIRECT_URI="${APP_URL}/auth/microsoft/callback"
+MICROSOFT_ALLOWED_DOMAINS=example.com,example.org
+```
+
+The allowed-domain list is optional; leave it empty to avoid domain filtering. Microsoft accounts are matched to users by email, so provision users and admin permissions in advance.
+
+### Email and queues
+
+Approval requests go to approvers and reservation status updates go to the requester. Configure SMTP using the `MAIL_*` values in `.env`. For Microsoft 365 SMTP, a typical setup uses `MAIL_HOST=smtp.office365.com`, `MAIL_PORT=587`, and `MAIL_ENCRYPTION=tls`; the mailbox may need authenticated SMTP enabled. Set `APP_URL` to the public application URL so signed email actions point to the right host.
+
+The example uses the database queue. Run a worker to process queued mail:
+
+```sh
+php artisan queue:work
+```
+
+For small local setups, `QUEUE_CONNECTION=sync` sends jobs immediately.
+
+### Demo admin sign-in
+
+The optional demo admin endpoint is disabled by default. Enable it only for a controlled demo environment, and make sure the configured email belongs to an existing admin account:
+
+```dotenv
+DEMO_ADMIN_LOGIN_ENABLED=true
+DEMO_ADMIN_EMAIL=admin@example.com
+```
+
+## Docker
+
+Build and run the included image with Docker. The container listens on port `10000` (or `$PORT`) and expects its environment and database connection to be provided at runtime.
+
+```sh
+docker build -t boardroom .
+docker run --env-file .env -p 10000:10000 boardroom
+```
+
+**Deployment note:** the current Docker startup command runs `migrate:fresh` and seeds the database on each container start. `migrate:fresh` drops existing tables and data. Review and change that command before using this image with any persistent or production database.
+
+## Useful commands
+
+| Command | Purpose |
+| --- | --- |
+| `composer run dev` | Start the Laravel, queue, logs, and Vite development processes |
+| `npm run build` | Build production frontend assets |
+| `php artisan migrate` | Apply pending database migrations |
+| `php artisan db:seed` | Add the sample room, users, and reservations |
+| `php artisan queue:work` | Process queued jobs, including email |
+| `composer test` | Run the Laravel test suite |
+
+## Project layout
+
+```text
+app/                 Laravel controllers, models, mail, and domain support
+database/            Migrations, factories, and seeders
+resources/js/        React application and UI components
+resources/views/     Laravel shell and email templates
+routes/web.php       Page, authentication, API, and stream routes
+public/images/       Public images, including the README banner
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## Email (SMTP)
-
-This app sends:
-- Approval-request emails to approvers when a reservation is created (pending).
-- Status-update emails to the requester when a reservation is approved or disapproved.
-
-Configure SMTP in `.env` (see `.env.example`). For Microsoft 365 / Outlook SMTP (STARTTLS), typical settings are:
-- `MAIL_HOST=smtp.office365.com`
-- `MAIL_PORT=587`
-- `MAIL_ENCRYPTION=tls`
-- `MAIL_USERNAME=your-mailbox@domain`
-- `MAIL_PASSWORD=...`
-- `MAIL_FROM_ADDRESS=your-mailbox@domain`
-
-Notes:
-- The approver “Approve/Disapprove” links in emails use `APP_URL`, so set `APP_URL` to your real public URL.
-- Emails are queued; run a worker (`php artisan queue:work`) or set `QUEUE_CONNECTION=sync` for immediate sending in small/local setups.
+This project is distributed under the MIT License, as declared in `composer.json`.

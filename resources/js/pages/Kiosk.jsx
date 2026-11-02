@@ -1419,7 +1419,7 @@ export default function Kiosk({ user }) {
 	            {!user ? (
 	              <a
 	                href={withBasePath("/login")}
-	                className="inline-flex items-center justify-center rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-200 dark:ring-slate-700 dark:hover:bg-slate-800"
+	                className="inline-flex items-center justify-center rounded-lg border border-brand-primary/30 bg-white px-3 py-2 text-sm font-medium text-brand-primary hover:bg-brand-primary/5 dark:border-brand-secondary/40 dark:bg-slate-900 dark:text-brand-secondary dark:hover:bg-slate-800"
 	              >
 	                Login
 	              </a>
@@ -1427,7 +1427,7 @@ export default function Kiosk({ user }) {
 	            {user && perms.anyAccess ? (
 	              <a
 	                href={withBasePath("/admin")}
-	                className="inline-flex items-center justify-center rounded-lg bg-white px-3 py-2 text-sm font-medium text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50 dark:bg-slate-900 dark:text-slate-200 dark:ring-slate-700 dark:hover:bg-slate-800"
+	                className="inline-flex items-center justify-center rounded-lg border border-brand-primary/30 bg-white px-3 py-2 text-sm font-medium text-brand-primary hover:bg-brand-primary/5 dark:border-brand-secondary/40 dark:bg-slate-900 dark:text-brand-secondary dark:hover:bg-slate-800"
 	              >
 	                Admin Panel
 	              </a>
